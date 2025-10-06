@@ -357,11 +357,11 @@ export default function ServicesSection() {
             <motion.article
               key={title}
               variants={cardVars}
-              ref={(el) => {
+              ref={(el: HTMLDivElement | null) => {
                 if (el) cardsRef.current[i] = el;
               }}
               className="rounded-3xl p-6 glass shadow-card transition will-change-transform
-                         ring-1 ring-white/5 hover:ring-primary-400/40 relative"
+               ring-1 ring-white/5 hover:ring-primary-400/40 relative"
             >
               {/* Project count badge */}
               <div className="absolute top-4 right-4 px-2 py-1 rounded-full bg-primary-400/20 ring-1 ring-primary-400/30 text-primary-300 text-xs font-medium">
