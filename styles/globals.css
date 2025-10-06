@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "swiper/css";
+@import "swiper/css/free-mode";
+@import "swiper/css/autoplay";
+
+html,
+body {
+  @apply bg-ink-900 text-white;
+}
+
+.glass {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.02)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-full px-6 py-3 font-medium
+  bg-gradient-to-r from-primary-400 to-accent-500 hover:from-primary-500 hover:to-accent-600 transition;
+}
+
+.pill {
+  @apply rounded-full px-4 py-2 glass;
+}

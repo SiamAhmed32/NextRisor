@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="60" viewBox="0 0 240 60">
+  <g fill="#B794F4">
+    <circle cx="16" cy="22" r="3"/>
+    <circle cx="28" cy="14" r="2.5"/>
+    <circle cx="36" cy="24" r="3"/>
+    <circle cx="24" cy="34" r="2.5"/>
+    <circle cx="40" cy="36" r="3"/>
+  </g>
+  <path d="M16 22L28 14L36 24L24 34L40 36" stroke="#9F7AEA" stroke-width="2"/>
+  <g fill="#fff">
+    <rect x="80" y="20" width="120" height="8" rx="4"/>
+    <rect x="80" y="36" width="90" height="8" rx="4" opacity="0.85"/>
+  </g>
+  <title>Orion Softworks</title>
+</svg>
