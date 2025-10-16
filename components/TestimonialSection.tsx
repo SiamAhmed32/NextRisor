@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import type React from "react";
 import { motion, useInView } from "framer-motion";
 
 /* =========================================================
@@ -160,6 +161,41 @@ function Stars({ value }: { value: number }) {
 }
 
 /* =========================================================
+   Tilt helpers (CSS-variable based, GPU friendly)
+   - Type-safe and avoids transform string growth
+   ========================================================= */
+function handleTilt(el: HTMLElement, e: React.MouseEvent) {
+    const r = el.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width - 0.5;
+    const py = (e.clientY - r.top) / r.height - 0.5;
+
+    // remember the "base" transform the card already had (rotate/translateY)
+    const base =
+        el.dataset.baseTransform ??
+        el.style.transform.split(" rotateX(")[0]; // robust against previous runs
+    el.dataset.baseTransform = base;
+
+    el.style.setProperty("--rx", `${py * -5}deg`);
+    el.style.setProperty("--ry", `${px * 8}deg`);
+    el.style.setProperty("--tx", `${px * 6}px`);
+    el.style.setProperty("--ty", `${py * 6}px`);
+
+    // overwrite transform each time instead of += (prevents infinite growth)
+    el.style.transform =
+        `${base} rotateX(var(--rx)) rotateY(var(--ry)) translate3d(var(--tx), var(--ty), 0)`;
+}
+
+function resetTilt(el: HTMLElement) {
+    el.style.setProperty("--rx", "0deg");
+    el.style.setProperty("--ry", "0deg");
+    el.style.setProperty("--tx", "0px");
+    el.style.setProperty("--ty", "0px");
+
+    const base = el.dataset.baseTransform ?? el.style.transform.split(" rotateX(")[0];
+    el.style.transform = base;
+}
+
+/* =========================================================
    Testimonial Card
    ========================================================= */
 function TestimonialCard({
@@ -192,8 +228,8 @@ function TestimonialCard({
             style={{
                 transform: `rotate(${baseRotate}) translateY(${baseTranslateY})`,
             }}
-            onMouseMove={(e) => handleTilt(e.currentTarget, e)}
-            onMouseLeave={(e) => resetTilt(e.currentTarget)}
+            onMouseMove={(e) => handleTilt(e.currentTarget as HTMLElement, e)}
+            onMouseLeave={(e) => resetTilt(e.currentTarget as HTMLElement)}
         >
             {/* Glow on hover */}
             <div
@@ -262,29 +298,6 @@ function BackgroundMesh() {
             />
         </div>
     );
-}
-
-/* =========================================================
-   Tilt helpers (CSS-variable based, GPU friendly)
-   ========================================================= */
-function handleTilt(el: HTMLDivElement, e: React.MouseEvent<HTMLDivElement>) {
-    const r = el.getBoundingClientRect();
-    const px = (e.clientX - r.left) / r.width - 0.5;
-    const py = (e.clientY - r.top) / r.height - 0.5;
-    el.style.setProperty("--rx", `${py * -5}deg`);
-    el.style.setProperty("--ry", `${px * 8}deg`);
-    el.style.setProperty("--tx", `${px * 6}px`);
-    el.style.setProperty("--ty", `${py * 6}px`);
-    el.style.transform += ` rotateX(var(--rx)) rotateY(var(--ry)) translate3d(var(--tx), var(--ty), 0)`;
-}
-function resetTilt(el: HTMLDivElement) {
-    el.style.setProperty("--rx", "0deg");
-    el.style.setProperty("--ry", "0deg");
-    el.style.setProperty("--tx", "0px");
-    el.style.setProperty("--ty", "0px");
-    // remove extra transform suffix while keeping base rotate/translateY
-    const base = el.style.transform.split(" rotateX(")[0];
-    el.style.transform = base;
 }
 
 /* =========================================================
