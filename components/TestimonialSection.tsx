@@ -132,7 +132,7 @@ function accentClasses(tone: Review["accent"]) {
 }
 
 /* =========================================================
-   Star Rating (animated fill)
+   Star Rating
    ========================================================= */
 function Stars({ value }: { value: number }) {
     return (
@@ -161,38 +161,25 @@ function Stars({ value }: { value: number }) {
 }
 
 /* =========================================================
-   Tilt helpers (CSS-variable based, GPU friendly)
-   - Type-safe and avoids transform string growth
+   Tilt Helpers (Type Fixed ✅)
    ========================================================= */
-function handleTilt(el: HTMLElement, e: React.MouseEvent) {
+function handleTilt(el: HTMLDivElement, e: React.MouseEvent<HTMLDivElement>) {
     const r = el.getBoundingClientRect();
     const px = (e.clientX - r.left) / r.width - 0.5;
     const py = (e.clientY - r.top) / r.height - 0.5;
-
-    // remember the "base" transform the card already had (rotate/translateY)
-    const base =
-        el.dataset.baseTransform ??
-        el.style.transform.split(" rotateX(")[0]; // robust against previous runs
-    el.dataset.baseTransform = base;
-
     el.style.setProperty("--rx", `${py * -5}deg`);
     el.style.setProperty("--ry", `${px * 8}deg`);
     el.style.setProperty("--tx", `${px * 6}px`);
     el.style.setProperty("--ty", `${py * 6}px`);
-
-    // overwrite transform each time instead of += (prevents infinite growth)
-    el.style.transform =
-        `${base} rotateX(var(--rx)) rotateY(var(--ry)) translate3d(var(--tx), var(--ty), 0)`;
+    el.style.transform = `rotateX(var(--rx)) rotateY(var(--ry)) translate3d(var(--tx), var(--ty), 0)`;
 }
 
-function resetTilt(el: HTMLElement) {
+function resetTilt(el: HTMLDivElement) {
     el.style.setProperty("--rx", "0deg");
     el.style.setProperty("--ry", "0deg");
     el.style.setProperty("--tx", "0px");
     el.style.setProperty("--ty", "0px");
-
-    const base = el.dataset.baseTransform ?? el.style.transform.split(" rotateX(")[0];
-    el.style.transform = base;
+    el.style.transform = `rotateX(0deg) rotateY(0deg) translate3d(0, 0, 0)`;
 }
 
 /* =========================================================
@@ -211,7 +198,6 @@ function TestimonialCard({
     const inView = useInView(ref, { once: true, margin: "-80px" });
     const a = accentClasses(review.accent);
 
-    // slight rotation & depth per lane to create layered look
     const baseRotate =
         layout === "left" ? "-1.5deg" : layout === "right" ? "1.5deg" : "0deg";
     const baseTranslateY = layout === "center" ? "0px" : idx % 2 === 0 ? "-6px" : "6px";
@@ -223,20 +209,22 @@ function TestimonialCard({
             animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
             transition={{ duration: 0.45, delay: idx * 0.06, ease: "easeOut" }}
             className={`relative rounded-3xl p-6 lg:p-7 bg-white/6 backdrop-blur-md ring-1 ${a.ring}
-                  shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_16px_44px_rgba(0,0,0,0.35)]
-                  will-change-transform`}
+                shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_16px_44px_rgba(0,0,0,0.35)]
+                will-change-transform`}
             style={{
                 transform: `rotate(${baseRotate}) translateY(${baseTranslateY})`,
             }}
-            onMouseMove={(e) => handleTilt(e.currentTarget as HTMLElement, e)}
-            onMouseLeave={(e) => resetTilt(e.currentTarget as HTMLElement)}
+            onMouseMove={(e: React.MouseEvent<HTMLDivElement>) =>
+                handleTilt(e.currentTarget as HTMLDivElement, e)
+            }
+            onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) =>
+                resetTilt(e.currentTarget as HTMLDivElement)
+            }
         >
-            {/* Glow on hover */}
             <div
                 className={`absolute -inset-px rounded-3xl opacity-0 hover:opacity-100 transition duration-300 blur-xl bg-gradient-to-r ${a.chip}`}
             />
 
-            {/* Header */}
             <div className="relative z-10 flex items-center gap-4">
                 <div
                     className={`w-12 h-12 shrink-0 rounded-full ring-1 ring-white/15 bg-gradient-to-br ${a.avatar} grid place-items-center text-[13px] font-semibold`}
@@ -256,12 +244,10 @@ function TestimonialCard({
                 </div>
             </div>
 
-            {/* Rating */}
             <div className="relative z-10 mt-3">
                 <Stars value={review.rating} />
             </div>
 
-            {/* Quote */}
             <p className="relative z-10 mt-3 text-sm leading-relaxed opacity-90">
                 “{review.quote}”
             </p>
@@ -270,7 +256,7 @@ function TestimonialCard({
 }
 
 /* =========================================================
-   Background Mesh (adds color diversity, premium feel)
+   Background Mesh
    ========================================================= */
 function BackgroundMesh() {
     return (
@@ -301,7 +287,7 @@ function BackgroundMesh() {
 }
 
 /* =========================================================
-   Mobile Slider (no extra lib; scroll-snap)
+   Mobile Slider
    ========================================================= */
 function MobileSlider() {
     return (
@@ -318,31 +304,27 @@ function MobileSlider() {
 }
 
 /* =========================================================
-   Desktop Layered Layout (unique asymmetric)
+   Desktop Layered Layout
    ========================================================= */
 function DesktopLayered() {
-    // Split into 3 lanes: left(2), center(2), right(2)
     const left = [REVIEWS[0], REVIEWS[1]];
     const center = [REVIEWS[2], REVIEWS[3]];
     const right = [REVIEWS[4], REVIEWS[5]];
 
     return (
         <div className="hidden md:grid grid-cols-12 gap-6 mt-10 lg:mt-14">
-            {/* Left column */}
             <div className="col-span-12 lg:col-span-4 space-y-6 self-start">
                 {left.map((r, i) => (
                     <TestimonialCard key={r.name} review={r} idx={i} layout="left" />
                 ))}
             </div>
 
-            {/* Center column (slightly offset for layering) */}
             <div className="col-span-12 lg:col-span-4 space-y-6 lg:pt-8">
                 {center.map((r, i) => (
                     <TestimonialCard key={r.name} review={r} idx={i + 2} layout="center" />
                 ))}
             </div>
 
-            {/* Right column */}
             <div className="col-span-12 lg:col-span-4 space-y-6 self-end">
                 {right.map((r, i) => (
                     <TestimonialCard key={r.name} review={r} idx={i + 4} layout="right" />
@@ -360,7 +342,7 @@ export default function TestimonialsSection() {
     const inView = useInView(headRef, { once: true, margin: "-80px" });
 
     useEffect(() => {
-        // no-op for now; reserved for future GSAP flourish if needed
+        // For future GSAP effects (optional)
     }, []);
 
     return (
@@ -379,19 +361,14 @@ export default function TestimonialsSection() {
                         <span className="w-2.5 h-2.5 rounded-full bg-primary-400" />
                         What People Say
                     </span>
-                    <h2 className="mt-2 text-3xl lg:text-4xl font-bold">
-                        Loved by founders, <span className="text-primary-400">trusted by teams</span>
-                    </h2>
+                    <h2 className="mt-2 text-3xl lg:text-4xl font-bold">Loved by founders, <span className="text-primary-400">trusted by teams</span></h2>
                     <p className="opacity-80 mt-2">
                         Real feedback from clients across Bangladesh and beyond — built by{" "}
                         <span className="text-primary-400 font-medium">Next Risor</span>.
                     </p>
                 </motion.div>
 
-                {/* Desktop layered layout */}
                 <DesktopLayered />
-
-                {/* Mobile slider */}
                 <MobileSlider />
             </div>
         </section>
