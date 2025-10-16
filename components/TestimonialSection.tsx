@@ -5,7 +5,7 @@ import type React from "react";
 import { motion, useInView } from "framer-motion";
 
 /* =========================================================
-   Types & Data
+   Types & Data Here
    ========================================================= */
 type Review = {
     name: string;
@@ -193,6 +193,7 @@ function TestimonialCard({
     review: Review;
     idx: number;
     layout: "left" | "right" | "center";
+
 }) {
     const ref = useRef<HTMLDivElement | null>(null);
     const inView = useInView(ref, { once: true, margin: "-80px" });
