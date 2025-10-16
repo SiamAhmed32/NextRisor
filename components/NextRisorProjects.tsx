@@ -228,14 +228,14 @@ function ProjectCard({
             {/* Content */}
             <div className="relative z-10 p-8 h-full flex flex-col justify-end min-h-[400px]">
                 {/* Category Badge */}
-                <motion.span
+                {/* <motion.span
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 + 0.2 }}
                     className="inline-block px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white text-sm font-medium mb-4 border border-white/20"
                 >
                     {project.category}
-                </motion.span>
+                </motion.span> */}
 
                 {/* Title & Description */}
                 <motion.h3
