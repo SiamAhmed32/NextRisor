@@ -12,6 +12,7 @@ export default function ContactSection() {
     });
 
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitSuccess, setSubmitSuccess] = useState(false);
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -23,7 +24,11 @@ export default function ContactSection() {
         setTimeout(() => {
             console.log(form);
             setIsSubmitting(false);
+            setSubmitSuccess(true);
             setForm({ name: "", email: "", subject: "", message: "" });
+            setTimeout(() => {
+                setSubmitSuccess(false);
+            }, 5000);
         }, 2000);
     }
 
@@ -245,6 +250,17 @@ export default function ContactSection() {
                                     </>
                                 )}
                             </motion.button>
+                            
+                            {submitSuccess && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0 }}
+                                    className="mt-4 p-4 rounded-xl bg-green-500/20 border border-green-500/30 text-green-300 text-sm text-center"
+                                >
+                                    ✓ Message sent successfully! We'll get back to you soon.
+                                </motion.div>
+                            )}
                         </form>
 
                         <motion.p

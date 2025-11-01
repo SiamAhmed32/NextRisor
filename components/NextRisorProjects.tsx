@@ -3,6 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 
+// Create motion components to avoid JSX parser issues
+const MotionDiv = motion.div;
+const MotionSpan = motion.span;
+const MotionH2 = motion.h2;
+const MotionP = motion.p;
+const MotionH3 = motion.h3;
+
 type Project = {
     title: string;
     subtitle: string;
@@ -81,7 +88,7 @@ export default function AdvancedProjectShowcase() {
             <div className="container">
                 {/* Header */}
                 <div className="text-center mb-16">
-                    <motion.span
+                    <MotionSpan
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -89,9 +96,9 @@ export default function AdvancedProjectShowcase() {
                     >
                         <div className="w-2 h-2 rounded-full bg-primary-400" />
                         PROJECT SHOWCASE
-                    </motion.span>
+                    </MotionSpan>
 
-                    <motion.h2
+                    <MotionH2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -99,9 +106,9 @@ export default function AdvancedProjectShowcase() {
                         className="text-4xl lg:text-6xl font-bold mb-6"
                     >
                         Our <span className="text-primary-400">Digital</span> Craft
-                    </motion.h2>
+                    </MotionH2>
 
-                    <motion.p
+                    <MotionP
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -109,11 +116,11 @@ export default function AdvancedProjectShowcase() {
                         className="text-xl text-gray-300 max-w-2xl mx-auto"
                     >
                         Transforming ideas into exceptional digital experiences that drive results and inspire innovation.
-                    </motion.p>
+                    </MotionP>
                 </div>
 
                 {/* Category Filter */}
-                <motion.div
+                <MotionDiv
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -132,10 +139,10 @@ export default function AdvancedProjectShowcase() {
                             {category}
                         </button>
                     ))}
-                </motion.div>
+                </MotionDiv>
 
                 {/* Projects Grid */}
-                <motion.div
+                <MotionDiv
                     layout
                     className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8"
                 >
@@ -150,7 +157,7 @@ export default function AdvancedProjectShowcase() {
                             />
                         ))}
                     </AnimatePresence>
-                </motion.div>
+                </MotionDiv>
             </div>
         </section>
     );
@@ -183,7 +190,7 @@ function ProjectCard({
     const isGradient = project.imageUrl.startsWith("gradient:");
 
     return (
-        <motion.div
+        <MotionDiv
             ref={cardRef}
             layout
             initial={{ opacity: 0, scale: 0.9, y: 30 }}
@@ -222,7 +229,7 @@ function ProjectCard({
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
 
                 {/* Hover Overlay */}
-                <motion.div
+                <MotionDiv
                     className="absolute inset-0 bg-primary-500/20"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: isHovered ? 1 : 0 }}
@@ -233,26 +240,26 @@ function ProjectCard({
             {/* Content */}
             <div className="relative z-10 p-8 h-full flex flex-col justify-end min-h-[400px]">
                 {/* Title & Description */}
-                <motion.h3
+                <MotionH3
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 + 0.3 }}
                     className="text-2xl lg:text-3xl font-bold text-white mb-3"
                 >
                     {project.title}
-                </motion.h3>
+                </MotionH3>
 
-                <motion.p
+                <MotionP
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 + 0.4 }}
                     className="text-gray-200 mb-6 text-lg"
                 >
                     {project.subtitle}
-                </motion.p>
+                </MotionP>
 
                 {/* Tags */}
-                <motion.div
+                <MotionDiv
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 + 0.5 }}
@@ -266,32 +273,40 @@ function ProjectCard({
                             {tag}
                         </span>
                     ))}
-                </motion.div>
+                </MotionDiv>
 
                 {/* CTA Button */}
-                <motion.div
+                <MotionDiv
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     whileHover={{ scale: 1.05 }}
                     transition={{ delay: index * 0.1 + 0.6, type: "spring" }}
                     className="flex gap-4"
                 >
-                    <button className="px-6 py-3 bg-white text-black rounded-full font-semibold hover:bg-gray-100 transition-colors">
+                    <a
+                        href={project.link || `/projects/${project.title.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and')}`}
+                        target={project.link ? "_blank" : undefined}
+                        rel={project.link ? "noopener noreferrer" : undefined}
+                        className="px-6 py-3 bg-white text-black rounded-full font-semibold hover:bg-gray-100 transition-colors"
+                    >
                         View Project
-                    </button>
-                    <button className="px-6 py-3 border border-white/30 text-white rounded-full font-semibold hover:bg-white/10 transition-colors">
+                    </a>
+                    <a
+                        href="/case-studies"
+                        className="px-6 py-3 border border-white/30 text-white rounded-full font-semibold hover:bg-white/10 transition-colors"
+                    >
                         Case Study
-                    </button>
-                </motion.div>
+                    </a>
+                </MotionDiv>
             </div>
 
             {/* Hover Effect Border */}
-            <motion.div
+            <MotionDiv
                 className="absolute inset-0 rounded-3xl border-2 border-primary-500/50 pointer-events-none"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: isHovered ? 1 : 0 }}
                 transition={{ duration: 0.3 }}
             />
-        </motion.div>
+        </MotionDiv>
     );
 }

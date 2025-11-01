@@ -1,41 +1,48 @@
 "use client";
 
-import { useEffect, ReactNode } from "react";
+import { useEffect, ReactNode, useRef } from "react";
+import Lenis from "@studio-freight/lenis";
 
 interface SmoothScrollProviderProps {
   children: ReactNode;
 }
 
-/**
- * Smooth Scroll Provider using Lenis
- * 
- * To enable smooth scrolling:
- * 1. Install: npm install @studio-freight/lenis
- * 2. Uncomment the Lenis code below
- * 
- * For now, this component provides native smooth scrolling via CSS
- */
 export default function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
-  useEffect(() => {
-    // Native smooth scroll via CSS
-    document.documentElement.style.scrollBehavior = "smooth";
+  const lenisRef = useRef<Lenis | null>(null);
 
-    // Optional: Initialize Lenis for advanced smooth scrolling
-    // Uncomment the code below after installing @studio-freight/lenis
-    /*
-    import Lenis from "@studio-freight/lenis";
-    
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
     const lenis = new Lenis({
       duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
       wheelMultiplier: 1,
-      smoothTouch: false,
+      smoothTouch: true,
       touchMultiplier: 2,
       infinite: false,
     });
+
+    lenisRef.current = lenis;
+
+    // Handle anchor link clicks
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = (e.target as HTMLElement).closest('a[href^="#"]');
+      if (target) {
+        const href = target.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          e.preventDefault();
+          const element = document.querySelector(href) as HTMLElement;
+          if (element) {
+            lenis.scrollTo(element, { offset: -80, duration: 1.5 });
+          }
+        }
+      }
+    };
+
+    document.addEventListener('click', handleAnchorClick);
 
     function raf(time: number) {
       lenis.raf(time);
@@ -45,12 +52,9 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
     requestAnimationFrame(raf);
 
     return () => {
+      document.removeEventListener('click', handleAnchorClick);
       lenis.destroy();
-    };
-    */
-
-    return () => {
-      document.documentElement.style.scrollBehavior = "auto";
+      lenisRef.current = null;
     };
   }, []);
 

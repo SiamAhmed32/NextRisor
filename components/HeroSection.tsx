@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import CircularText from "./CircularText";
 
 // Register GSAP ScrollTrigger plugin
 if (typeof window !== "undefined") {
@@ -68,19 +69,20 @@ export default function HeroSection(props: HeroSectionProps = {}) {
     let videoTriggerInstance: ReturnType<typeof ScrollTrigger.create> | null = null;
 
     const ctx = gsap.context(() => {
-      // Content fade animation (reversible)
+      // Content fade animation (reversible) - only fade after hero section passes viewport top
       scrollTriggerInstance = ScrollTrigger.create({
         trigger: sectionRef.current,
         start: "top top",
-        end: "bottom top",
+        end: "+=100vh", // End after scrolling past one viewport height
         scrub: 1,
         onUpdate: (self) => {
           if (contentRef.current) {
-            const progress = self.progress;
+            const progress = Math.min(self.progress, 1);
             // Make it reversible - when scrolling back up, content reappears
+            // Only fade out after scrolling past the hero section
             gsap.to(contentRef.current, {
-              opacity: 1 - progress,
-              y: -50 * progress,
+              opacity: Math.max(0.3, 1 - progress), // Keep minimum 30% opacity so it's always visible
+              y: -30 * progress, // Reduced movement
               duration: 0.1,
               ease: "none",
             });
@@ -152,7 +154,7 @@ export default function HeroSection(props: HeroSectionProps = {}) {
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen flex items-center justify-center text-center overflow-hidden pt-16"
+      className="relative min-h-screen flex items-center justify-center text-center overflow-hidden pt-16"
       aria-label="Hero section"
     >
       {/* Background Video */}
@@ -248,20 +250,30 @@ export default function HeroSection(props: HeroSectionProps = {}) {
           // Only use Framer Motion for initial animation
         }}
       >
-        {/* Status Badge */}
-                <motion.div
+        {/* Status Badge with Circular Text */}
+        <motion.div
           variants={itemVariants}
-          className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-8 shadow-lg"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-8"
         >
-          <div className="flex space-x-1.5">
-                    <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                    <div className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
-                    <div className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />
-                  </div>
-          <span className="text-sm font-medium text-white/90">
-            We're accepting new projects
-          </span>
-                </motion.div>
+          <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg">
+            <div className="flex space-x-1.5">
+              <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+              <div className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
+              <div className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />
+            </div>
+            <span className="text-sm font-medium text-white/90">
+              We're accepting new projects
+            </span>
+          </div>
+          <div className="hidden sm:block">
+            <CircularText
+              text="REACT*BITS*COMPONENTS*"
+              onHover="speedUp"
+              spinDuration={20}
+              className="text-primary-400"
+            />
+          </div>
+        </motion.div>
 
         {/* Main Headline */}
                 <motion.h1

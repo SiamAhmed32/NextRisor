@@ -235,7 +235,32 @@ export default function CaseStudiesSection() {
                     </div>
                 </motion.div>
 
-                {/* Case Studies Grid */}
+                {/* Featured Case Studies with ScrollStack */}
+                {filteredCases.filter(s => s.featured).length > 0 && (
+                    <div className="mb-12 sm:mb-16">
+                        <h3 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center">
+                            Featured <span className="text-primary-400">Projects</span>
+                        </h3>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+                            <AnimatePresence mode="wait">
+                                {filteredCases
+                                    .filter(s => s.featured)
+                                    .slice(0, 2)
+                                    .map((study, index) => (
+                                        <CaseStudyCard
+                                            key={study.id}
+                                            study={study}
+                                            index={index}
+                                            isHovered={hoveredCase === study.id}
+                                            onHover={setHoveredCase}
+                                        />
+                                    ))}
+                            </AnimatePresence>
+                        </div>
+                    </div>
+                )}
+
+                {/* All Case Studies Grid */}
                 <motion.div
                     layout
                     className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
@@ -423,7 +448,7 @@ function CaseStudyCard({
                     className="flex gap-2"
                 >
                     <a
-                        href={study.link || "#"}
+                        href={study.link ? study.link : `/projects/${study.id}`}
                         target={study.link ? "_blank" : undefined}
                         rel={study.link ? "noopener noreferrer" : undefined}
                         className="flex-1 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-primary-500 to-accent-500 rounded-xl font-semibold text-white text-center text-sm sm:text-base hover:shadow-lg hover:shadow-primary-500/25 transition-all"
