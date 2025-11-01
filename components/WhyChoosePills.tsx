@@ -30,7 +30,7 @@ export default function WhyChooseUsPills() {
             <h2 className="text-3xl lg:text-5xl font-bold leading-tight">
               Why You
               <br className="hidden md:block" />
-              <span className="block">Choose Next Risor?</span>
+              <span className="block">Choose Next Riser?</span>
             </h2>
 
             <p className="mt-4 opacity-85">
@@ -41,7 +41,7 @@ export default function WhyChooseUsPills() {
 
             <a
               href="#contact"
-              className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-primary-400 to-accent-500 text-ink-900 font-medium shadow-[0_10px_30px_rgba(124,45,255,0.35)] hover:scale-[1.02] active:scale-[0.99] transition"
+              className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-primary-400 to-accent-500 text-ink-900 font-medium shadow-[0_10px_30px_rgba(20,35,160,0.35)] hover:scale-[1.02] active:scale-[0.99] transition"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                 <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />

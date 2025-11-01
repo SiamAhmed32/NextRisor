@@ -26,7 +26,7 @@ const REVIEWS: Review[] = [
         platform: "Google",
         rating: 5,
         quote:
-            "Next Risor delivered a clean, fast site with thoughtful animations. Our bounce rate dropped within a week.",
+            "Next Riser delivered a clean, fast site with thoughtful animations. Our bounce rate dropped within a week.",
         initials: "NJ",
         accent: "violet",
     },
@@ -365,7 +365,7 @@ export default function TestimonialsSection() {
                     <h2 className="mt-2 text-3xl lg:text-4xl font-bold">Loved by founders, <span className="text-primary-400">trusted by teams</span></h2>
                     <p className="opacity-80 mt-2">
                         Real feedback from clients across Bangladesh and beyond — built by{" "}
-                        <span className="text-primary-400 font-medium">Next Risor</span>.
+                        <span className="text-primary-400 font-medium">Next Riser</span>.
                     </p>
                 </motion.div>
 

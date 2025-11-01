@@ -21,7 +21,7 @@ export default function Navbar() {
     >
       <div className="container h-16 flex items-center justify-between">
         {/* Brand */}
-        <a href="#" className="inline-flex items-center gap-2 group">
+        <a href="/" className="inline-flex items-center gap-2 group">
           <motion.div
             className="w-8 h-8 lg:w-10 lg:h-10 rounded-xl bg-gradient-to-tr from-primary-400 to-accent-500 flex items-center justify-center shadow-lg shadow-primary-500/25"
             whileHover={{ rotate: 180 }}
@@ -30,27 +30,52 @@ export default function Navbar() {
             <span className="text-white font-bold text-sm">NR</span>
           </motion.div>
           <span className="font-semibold tracking-wide">
-            Next <span className="text-primary-400">Risor</span>
+            Next <span className="text-primary-400">Riser</span>
           </span>
         </a>
 
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-8 text-sm">
-          {["Home", "Services", "Stories", "Contact"].map((item) => (
-            <a
-              key={item}
-              href={item === "Home" ? "#" : `#${item.toLowerCase()}`}
-              className="relative opacity-85 hover:opacity-100 transition"
-            >
-              {item}
+          <a
+            href="/"
+            className="relative opacity-85 hover:opacity-100 transition group"
+          >
+            Home
+            <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-gradient-to-r from-primary-400 to-accent-500 transition-all group-hover:w-full" />
+          </a>
+          <a
+            href="/services"
+            className="relative opacity-85 hover:opacity-100 transition group"
+          >
+            Services
+            <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-gradient-to-r from-primary-400 to-accent-500 transition-all group-hover:w-full" />
+          </a>
+          <a
+            href="/case-studies"
+            className="relative opacity-85 hover:opacity-100 transition group"
+          >
+            Case Studies
+            <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-gradient-to-r from-primary-400 to-accent-500 transition-all group-hover:w-full" />
+          </a>
+          <a
+            href="/about"
+            className="relative opacity-85 hover:opacity-100 transition group"
+          >
+            About Company
+            <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-gradient-to-r from-primary-400 to-accent-500 transition-all group-hover:w-full" />
+          </a>
+          <a
+            href="/testimonials"
+            className="relative opacity-85 hover:opacity-100 transition group"
+          >
+            Testimonial
               <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-gradient-to-r from-primary-400 to-accent-500 transition-all group-hover:w-full" />
             </a>
-          ))}
           <a
-            href="#services"
-            className="btn-primary shadow-[0_8px_24px_rgba(124,45,255,0.35)]"
+            href="/contact"
+            className="btn-primary shadow-[0_8px_24px_rgba(20,35,160,0.35)]"
           >
-            Explore Now
+            Contact Us
           </a>
         </nav>
 
@@ -85,18 +110,43 @@ export default function Navbar() {
                 <button className="pill" onClick={() => setOpen(false)}>Close</button>
               </div>
               <nav className="grid gap-2 text-sm">
-                {["Home", "Services", "Stories", "Contact"].map((item) => (
-                  <a
-                    key={item}
-                    href={item === "Home" ? "#" : `#${item.toLowerCase()}`}
+                <a
+                  href="/"
+                  onClick={() => setOpen(false)}
+                  className="pill hover:ring-1 hover:ring-white/10"
+                >
+                  Home
+                </a>
+                <a
+                  href="/services"
+                  onClick={() => setOpen(false)}
+                  className="pill hover:ring-1 hover:ring-white/10"
+                >
+                  Services
+                </a>
+                <a
+                  href="/case-studies"
+                  onClick={() => setOpen(false)}
+                  className="pill hover:ring-1 hover:ring-white/10"
+                >
+                  Case Studies
+                </a>
+                <a
+                  href="/about"
+                  onClick={() => setOpen(false)}
+                  className="pill hover:ring-1 hover:ring-white/10"
+                >
+                  About Company
+                </a>
+                <a
+                  href="/testimonials"
                     onClick={() => setOpen(false)}
                     className="pill hover:ring-1 hover:ring-white/10"
                   >
-                    {item}
+                  Testimonial
                   </a>
-                ))}
-                <a href="#services" onClick={() => setOpen(false)} className="btn-primary mt-2">
-                  Explore Now
+                <a href="/contact" onClick={() => setOpen(false)} className="btn-primary mt-2">
+                  Contact Us
                 </a>
               </nav>
             </motion.aside>

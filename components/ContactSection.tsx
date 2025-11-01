@@ -31,12 +31,14 @@ export default function ContactSection() {
         {
             icon: (
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                    <polyline points="22,6 12,13 2,6" />
                 </svg>
             ),
-            title: "Chat with us",
-            description: "Our friendly team is here to help.",
-            contact: "contact@nextrisor.com"
+            title: "Email us",
+            description: "Drop us a line anytime.",
+            contact: "nextriser.team@gmail.com",
+            href: "mailto:nextriser.team@gmail.com"
         },
         {
             icon: (
@@ -45,19 +47,20 @@ export default function ContactSection() {
                 </svg>
             ),
             title: "Call us",
-            description: "Mon-Fri from 9am to 5pm.",
-            contact: "+1 (555) 123-4567"
+            description: "Available Mon-Sun 9am to 9pm.",
+            contact: "01813494196 / 01747410327",
+            href: "tel:01813494196"
         },
         {
             icon: (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-                    <circle cx="12" cy="10" r="3" />
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                 </svg>
             ),
-            title: "Visit us",
-            description: "Come say hello at our office.",
-            contact: "123 Design Street, Creative City"
+            title: "Follow us",
+            description: "Stay connected on social media.",
+            contact: "facebook.com/nextriser",
+            href: "https://www.facebook.com/nextriser"
         }
     ];
 

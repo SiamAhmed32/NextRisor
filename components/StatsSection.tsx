@@ -29,7 +29,7 @@ export default function StatsSection() {
                 <div className="mx-auto max-w-2xl text-center">
                     <h2 className="text-3xl lg:text-4xl font-bold">Our Numbers</h2>
                     <p className="opacity-80 mt-2">
-                        Momentum that matters — <span className="text-primary-400 font-medium">Next Risor</span> grows with every launch.
+                        Momentum that matters — <span className="text-primary-400 font-medium">Next Riser</span> grows with every launch.
                     </p>
                 </div>
 
