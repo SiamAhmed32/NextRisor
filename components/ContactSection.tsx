@@ -65,7 +65,7 @@ export default function ContactSection() {
     ];
 
     return (
-        <section id="contact" className="relative py-24 lg:py-32 overflow-hidden">
+        <section id="contact" className="relative py-12 sm:py-16 lg:py-24 xl:py-32 overflow-hidden px-4 sm:px-6">
             <div className="pointer-events-none absolute inset-0 -z-10">
                 <motion.div
                     className="absolute -top-40 -left-20 w-[700px] h-[700px] rounded-full blur-3xl opacity-15"
@@ -92,7 +92,7 @@ export default function ContactSection() {
             </div>
 
             <div className="container">
-                <div className="grid lg:grid-cols-2 gap-16 items-start">
+                <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-start">
                     <div className="space-y-8">
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
@@ -109,7 +109,7 @@ export default function ContactSection() {
                                 <span className="text-sm font-medium text-white/80">Get in touch</span>
                             </div>
 
-                            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+                            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
                                 Let's Start Your
                                 <motion.span
                                     className="block text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-accent-500"
@@ -129,7 +129,7 @@ export default function ContactSection() {
                                 </motion.span>
                             </h2>
 
-                            <p className="text-xl text-white/70 leading-relaxed">
+                            <p className="text-base sm:text-lg lg:text-xl text-white/70 leading-relaxed">
                                 Ready to bring your vision to life? Let's discuss your project and create something extraordinary together.
                             </p>
                         </motion.div>
@@ -162,7 +162,7 @@ export default function ContactSection() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
-                        className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 lg:p-10"
+                        className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10"
                     >
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">

@@ -8,7 +8,7 @@ import WhyChoosePills from "@/components/WhyChoosePills";
 import HowItWorks from "@/components/HowItWorks";
 import StatsSection from "@/components/StatsSection";
 import TestimonialsSection from "@/components/TestimonialSection";
-import NextRiserProjects from "@/components/NextRiserProjects";
+import CaseStudiesSection from "@/components/CaseStudiesSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import ContactSection from "@/components/ContactSection";
@@ -27,7 +27,7 @@ export default function Page() {
         subtitle="Trusted by innovative companies and growing startups"
       />
       <ServicesSection />
-      <NextRiserProjects />
+      <CaseStudiesSection />
       <WhyChoosePills />
       <HowItWorks />
       <StatsSection />

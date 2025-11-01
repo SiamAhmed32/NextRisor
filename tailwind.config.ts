@@ -4,8 +4,8 @@ const config: Config = {
   theme: {
     container: {
       center: true,
-      padding: { DEFAULT: "1rem", lg: "2rem" },
-      screens: { lg: "1120px" }
+      padding: { DEFAULT: "1rem", sm: "1.5rem", lg: "2rem" },
+      screens: { sm: "640px", md: "768px", lg: "1120px", xl: "1280px" }
     },
     extend: {
       colors: {

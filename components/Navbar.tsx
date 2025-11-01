@@ -82,10 +82,10 @@ export default function Navbar() {
         {/* Mobile button */}
         <button
           aria-label="Open menu"
-          className="lg:hidden p-2 rounded-xl glass"
+          className="lg:hidden p-2.5 rounded-xl glass z-[10000] relative"
           onClick={() => setOpen(true)}
         >
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" className="text-white">
             <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
           </svg>
         </button>
@@ -96,56 +96,73 @@ export default function Navbar() {
         {open && (
           <>
             <motion.div
-              className="fixed inset-0 bg-black/60"
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[9998]"
+              initial={{ opacity: 0 }} 
+              animate={{ opacity: 1 }} 
+              exit={{ opacity: 0 }}
               onClick={() => setOpen(false)}
             />
             <motion.aside
-              initial={{ x: -320 }} animate={{ x: 0 }} exit={{ x: -320 }}
+              initial={{ x: "-100%" }} 
+              animate={{ x: 0 }} 
+              exit={{ x: "-100%" }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="fixed left-0 top-0 h-full w-80 bg-ink-800 p-6 z-50 flex flex-col gap-4"
+              className="fixed left-0 top-0 h-full w-[85vw] max-w-sm bg-ink-800/95 backdrop-blur-xl border-r border-white/10 p-6 z-[9999] flex flex-col gap-6 shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex items-center justify-between">
-                <div className="font-semibold">Menu</div>
-                <button className="pill" onClick={() => setOpen(false)}>Close</button>
+              <div className="flex items-center justify-between mb-4 pb-4 border-b border-white/10">
+                <div className="font-bold text-lg text-white">Menu</div>
+                <button 
+                  className="p-2 rounded-lg hover:bg-white/10 transition-colors" 
+                  onClick={() => setOpen(false)}
+                  aria-label="Close menu"
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                  </svg>
+                </button>
               </div>
-              <nav className="grid gap-2 text-sm">
+              <nav className="grid gap-3 flex-1 overflow-y-auto">
                 <a
                   href="/"
                   onClick={() => setOpen(false)}
-                  className="pill hover:ring-1 hover:ring-white/10"
+                  className="px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all text-white font-medium"
                 >
                   Home
                 </a>
                 <a
                   href="/services"
                   onClick={() => setOpen(false)}
-                  className="pill hover:ring-1 hover:ring-white/10"
+                  className="px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all text-white font-medium"
                 >
                   Services
                 </a>
                 <a
                   href="/case-studies"
                   onClick={() => setOpen(false)}
-                  className="pill hover:ring-1 hover:ring-white/10"
+                  className="px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all text-white font-medium"
                 >
                   Case Studies
                 </a>
                 <a
                   href="/about"
                   onClick={() => setOpen(false)}
-                  className="pill hover:ring-1 hover:ring-white/10"
+                  className="px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all text-white font-medium"
                 >
                   About Company
                 </a>
                 <a
                   href="/testimonials"
-                    onClick={() => setOpen(false)}
-                    className="pill hover:ring-1 hover:ring-white/10"
-                  >
-                  Testimonial
-                  </a>
-                <a href="/contact" onClick={() => setOpen(false)} className="btn-primary mt-2">
+                  onClick={() => setOpen(false)}
+                  className="px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all text-white font-medium"
+                >
+                  Testimonials
+                </a>
+                <a 
+                  href="/contact" 
+                  onClick={() => setOpen(false)} 
+                  className="mt-auto px-6 py-3 bg-gradient-to-r from-primary-500 to-accent-500 rounded-xl font-semibold text-white text-center shadow-lg hover:shadow-xl transition-all"
+                >
                   Contact Us
                 </a>
               </nav>

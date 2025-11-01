@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function CTASection() {
     return (
-        <section className="relative py-24 lg:py-32 overflow-hidden">
+        <section className="relative py-12 sm:py-16 lg:py-24 xl:py-32 overflow-hidden px-4 sm:px-6">
             <div className="pointer-events-none absolute inset-0 -z-10">
                 <motion.div
                     className="absolute -top-40 left-1/4 w-[800px] h-[800px] rounded-full blur-3xl opacity-15"
@@ -104,7 +104,7 @@ export default function CTASection() {
                         </motion.a>
 
                         <motion.a
-                            href="#projects"
+                            href="/case-studies"
                             className="px-8 py-4 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl font-semibold text-white hover:bg-white/10 transition-all duration-300 flex items-center gap-3"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}

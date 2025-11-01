@@ -11,7 +11,7 @@ export default function Footer() {
       links: [
         { name: "About Us", href: "#" },
         { name: "Our Services", href: "#services" },
-        { name: "Case Studies", href: "#projects" },
+        { name: "Case Studies", href: "/case-studies" },
         { name: "Careers", href: "#" },
         { name: "Blog", href: "#" },
       ]

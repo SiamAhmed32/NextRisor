@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import NextRiserProjects from "@/components/NextRiserProjects";
+import CaseStudiesSection from "@/components/CaseStudiesSection";
 import CTASection from "@/components/CTASection";
 
 export default function CaseStudiesPage() {
@@ -27,7 +27,7 @@ export default function CaseStudiesPage() {
         </div>
       </section>
 
-      <NextRiserProjects />
+      <CaseStudiesSection />
       <CTASection />
       <Footer />
     </main>

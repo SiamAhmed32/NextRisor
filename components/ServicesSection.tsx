@@ -337,11 +337,11 @@ export default function ServicesSection() {
   }, []);
 
   return (
-    <section id="services" className="py-16 lg:py-24">
+    <section id="services" className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6">
       <div className="container">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <h2 className="text-3xl lg:text-5xl font-semibold">Our Services</h2>
-          <p className="opacity-80 mt-3">
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold mb-3 sm:mb-4">Our Services</h2>
+          <p className="opacity-80 mt-3 text-sm sm:text-base">
             A full-stack creative and engineering team to design, build, and grow your brand.
           </p>
         </div>
@@ -351,7 +351,7 @@ export default function ServicesSection() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
         >
           {SERVICES.map(({ title, description, Icon, projects }, i) => (
             <motion.article
@@ -360,7 +360,7 @@ export default function ServicesSection() {
               ref={(el: HTMLDivElement | null) => {
                 if (el) cardsRef.current[i] = el;
               }}
-              className="rounded-3xl p-6 glass shadow-card transition will-change-transform
+              className="rounded-2xl sm:rounded-3xl p-5 sm:p-6 glass shadow-card transition will-change-transform
                ring-1 ring-white/5 hover:ring-primary-400/40 relative"
             >
               {/* Project count badge */}

@@ -23,17 +23,17 @@ export default function WhyChooseUsPills() {
       <div className="pointer-events-none absolute -top-32 -left-28 h-[520px] w-[520px] rounded-full blur-3xl opacity-25 bg-gradient-to-tr from-primary-400 to-accent-500" />
       <div className="pointer-events-none absolute -bottom-40 -right-32 h-[640px] w-[640px] rounded-full blur-3xl opacity-25 bg-gradient-to-tr from-accent-500 to-primary-400" />
 
-      <div className="container py-16 lg:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
+      <div className="container py-12 sm:py-16 lg:py-24 px-4 sm:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center">
           {/* LEFT: copy */}
           <div className="max-w-xl">
-            <h2 className="text-3xl lg:text-5xl font-bold leading-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold leading-tight">
               Why You
               <br className="hidden md:block" />
               <span className="block">Choose Next Riser?</span>
             </h2>
 
-            <p className="mt-4 opacity-85">
+            <p className="mt-4 opacity-85 text-sm sm:text-base">
               We build fast, scalable experiences with pixel-perfect detail, modern stacks,
               and flexible engagement. Clear communication, transparent milestones, and
               round-the-clock support — so you can focus on growth.

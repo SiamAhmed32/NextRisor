@@ -15,6 +15,15 @@ type Project = {
 
 const PROJECTS: Project[] = [
     {
+        title: "Violet Bangladesh",
+        subtitle: "E-commerce Gift & Merchandise Platform",
+        imageUrl: "/brands/violet-bangladesh.png",
+        tags: ["E-commerce", "WooCommerce", "Gift Shop", "Branding"],
+        category: "E-commerce",
+        featured: true,
+        link: "https://violetbangladesh.com",
+    },
+    {
         title: "Doctor Appointment System",
         subtitle: "Healthcare portal & booking platform",
         imageUrl: "/images/DocAppointment.png",
@@ -51,16 +60,9 @@ const PROJECTS: Project[] = [
         tags: ["Social", "Real-time", "Community"],
         category: "Social",
     },
-    {
-        title: "Fintech Mobile App",
-        subtitle: "Banking and investment platform",
-        imageUrl: "gradient:cyan-blue",
-        tags: ["Mobile", "Finance", "Security"],
-        category: "Mobile",
-    },
 ];
 
-const CATEGORIES = ["All", "Web App", "E-commerce", "Dashboard", "SaaS", "Social", "Mobile"];
+const CATEGORIES = ["All", "E-commerce", "Web App", "Dashboard", "SaaS", "Social"];
 
 export default function AdvancedProjectShowcase() {
     const [activeCategory, setActiveCategory] = useState("All");
@@ -71,7 +73,7 @@ export default function AdvancedProjectShowcase() {
         : PROJECTS.filter(project => project.category === activeCategory);
 
     return (
-        <section id="projects" className="relative overflow-hidden py-20 lg:py-28">
+        <section id="projects" className="relative overflow-hidden py-12 sm:py-16 lg:py-24 px-4 sm:px-6">
             {/* Animated background */}
             <div className="pointer-events-none absolute inset-0 -z-10">
                 <div className="absolute -top-40 -left-32 w-[600px] h-[600px] rounded-full blur-3xl opacity-20 bg-gradient-to-r from-blue-500/30 to-purple-600/30" />
@@ -80,7 +82,7 @@ export default function AdvancedProjectShowcase() {
 
             <div className="container">
                 {/* Header */}
-                <div className="text-center mb-16">
+                <div className="text-center mb-8 sm:mb-12 lg:mb-16">
                     <motion.span
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -94,7 +96,7 @@ export default function AdvancedProjectShowcase() {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="text-4xl lg:text-6xl font-bold mb-6"
+                        className="text-3xl sm:text-4xl lg:text-6xl font-bold mb-4 sm:mb-6"
                     >
                         Our <span className="text-primary-400">Digital</span> Craft
                     </motion.h2>
@@ -103,7 +105,7 @@ export default function AdvancedProjectShowcase() {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="text-xl text-gray-300 max-w-2xl mx-auto"
+                        className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto"
                     >
                         Transforming ideas into exceptional digital experiences that drive results and inspire innovation.
                     </motion.p>
@@ -114,13 +116,13 @@ export default function AdvancedProjectShowcase() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
-                    className="flex flex-wrap justify-center gap-4 mb-12"
+                    className="flex flex-wrap justify-center gap-2 sm:gap-3 lg:gap-4 mb-8 sm:mb-12"
                 >
                     {CATEGORIES.map((category) => (
                         <button
                             key={category}
                             onClick={() => setActiveCategory(category)}
-                            className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${activeCategory === category
+                            className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium transition-all duration-300 text-sm sm:text-base ${activeCategory === category
                                     ? "bg-primary-500 text-white shadow-lg shadow-primary-500/25"
                                     : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"
                                 }`}
@@ -133,7 +135,7 @@ export default function AdvancedProjectShowcase() {
                 {/* Projects Grid */}
                 <motion.div
                     layout
-                    className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8"
+                    className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
                 >
                     <AnimatePresence>
                         {filteredProjects.map((project, index) => (
@@ -226,7 +228,7 @@ function ProjectCard({
             </div>
 
             {/* Content */}
-            <div className="relative z-10 p-8 h-full flex flex-col justify-end min-h-[400px]">
+            <div className="relative z-10 p-6 sm:p-8 h-full flex flex-col justify-end min-h-[300px] sm:min-h-[400px]">
                 {/* Category Badge */}
                 {/* <motion.span
                     initial={{ opacity: 0, x: -20 }}
@@ -242,7 +244,7 @@ function ProjectCard({
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 + 0.3 }}
-                    className="text-2xl lg:text-3xl font-bold text-white mb-3"
+                    className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-2 sm:mb-3"
                 >
                     {project.title}
                 </motion.h3>
@@ -251,7 +253,7 @@ function ProjectCard({
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 + 0.4 }}
-                    className="text-gray-200 mb-6 text-lg"
+                    className="text-gray-200 mb-4 sm:mb-6 text-base sm:text-lg"
                 >
                     {project.subtitle}
                 </motion.p>
@@ -281,10 +283,10 @@ function ProjectCard({
                     transition={{ delay: index * 0.1 + 0.6, type: "spring" }}
                     className="flex gap-4"
                 >
-                    <button className="px-6 py-3 bg-white text-black rounded-full font-semibold hover:bg-gray-100 transition-colors">
+                    <button className="px-4 sm:px-6 py-2 sm:py-3 bg-white text-black rounded-full font-semibold hover:bg-gray-100 transition-colors text-sm sm:text-base">
                         View Project
                     </button>
-                    <button className="px-6 py-3 border border-white/30 text-white rounded-full font-semibold hover:bg-white/10 transition-colors">
+                    <button className="px-4 sm:px-6 py-2 sm:py-3 border border-white/30 text-white rounded-full font-semibold hover:bg-white/10 transition-colors text-sm sm:text-base">
                         Case Study
                     </button>
                 </motion.div>

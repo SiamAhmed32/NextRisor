@@ -25,16 +25,16 @@ export default function StatsSection() {
                 <div className="absolute -bottom-48 -right-24 h-[620px] w-[620px] rounded-full blur-3xl opacity-25 bg-gradient-to-tr from-sky-400/25 to-indigo-500/20" />
             </div>
 
-            <div className="container py-16 lg:py-24">
+            <div className="container py-12 sm:py-16 lg:py-24 px-4 sm:px-6">
                 <div className="mx-auto max-w-2xl text-center">
-                    <h2 className="text-3xl lg:text-4xl font-bold">Our Numbers</h2>
-                    <p className="opacity-80 mt-2">
+                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold">Our Numbers</h2>
+                    <p className="opacity-80 mt-2 text-sm sm:text-base">
                         Momentum that matters — <span className="text-primary-400 font-medium">Next Riser</span> grows with every launch.
                     </p>
                 </div>
 
                 {/* wide, premium grid */}
-                <div className="mt-10 lg:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+                <div className="mt-8 sm:mt-10 lg:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
                     {STATS.map((s, i) => (
                         <StatCard key={s.label} stat={s} index={i} />
                     ))}

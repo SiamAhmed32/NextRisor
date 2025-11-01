@@ -273,8 +273,8 @@ export default function HowItWorks() {
                     transition={{ duration: 0.5 }}
                     className="mx-auto max-w-2xl text-center"
                 >
-                    <h2 className="text-3xl lg:text-4xl font-bold">How It Works</h2>
-                    <p className="opacity-80 mt-2">
+                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold">How It Works</h2>
+                    <p className="opacity-80 mt-2 text-sm sm:text-base">
                         A simple 6-step flow we use at <span className="text-primary-400 font-medium">Next Riser</span> to deliver high-quality outcomes.
                     </p>
                 </motion.div>

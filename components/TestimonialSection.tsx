@@ -350,7 +350,7 @@ export default function TestimonialsSection() {
         <section id="testimonials" className="relative overflow-hidden">
             <BackgroundMesh />
 
-            <div className="container py-16 lg:py-24">
+            <div className="container py-12 sm:py-16 lg:py-24 px-4 sm:px-6">
                 <motion.div
                     ref={headRef}
                     initial={{ opacity: 0, y: 12 }}
@@ -362,8 +362,8 @@ export default function TestimonialsSection() {
                         <span className="w-2.5 h-2.5 rounded-full bg-primary-400" />
                         What People Say
                     </span>
-                    <h2 className="mt-2 text-3xl lg:text-4xl font-bold">Loved by founders, <span className="text-primary-400">trusted by teams</span></h2>
-                    <p className="opacity-80 mt-2">
+                    <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-bold">Loved by founders, <span className="text-primary-400">trusted by teams</span></h2>
+                    <p className="opacity-80 mt-2 text-sm sm:text-base">
                         Real feedback from clients across Bangladesh and beyond — built by{" "}
                         <span className="text-primary-400 font-medium">Next Riser</span>.
                     </p>
