@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import MagicBento from "./MagicBento";
+import ScrollStack, { ScrollStackItem } from "./ScrollStack";
 
 type CaseStudy = {
     id: string;
@@ -260,22 +262,82 @@ export default function CaseStudiesSection() {
                     </div>
                 )}
 
-                {/* All Case Studies Grid */}
+                {/* Case Studies with ScrollStack */}
                 <motion.div
-                    layout
-                    className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                    className="mt-8 sm:mt-12"
                 >
-                    <AnimatePresence mode="wait">
+                    <ScrollStack 
+                        useWindowScroll={true} 
+                        itemDistance={120}
+                        itemScale={0.05}
+                        itemStackDistance={25}
+                        stackPosition="25%"
+                        scaleEndPosition="15%"
+                        baseScale={0.9}
+                        rotationAmount={2}
+                        blurAmount={2}
+                    >
                         {filteredCases.map((study, index) => (
-                            <CaseStudyCard
-                                key={study.id}
-                                study={study}
-                                index={index}
-                                isHovered={hoveredCase === study.id}
-                                onHover={setHoveredCase}
-                            />
+                            <ScrollStackItem key={study.id}>
+                                <div className="w-full">
+                                    <CaseStudyCard
+                                        study={study}
+                                        index={index}
+                                        isHovered={hoveredCase === study.id}
+                                        onHover={setHoveredCase}
+                                    />
+                                </div>
+                            </ScrollStackItem>
                         ))}
-                    </AnimatePresence>
+                    </ScrollStack>
+                </motion.div>
+
+                {/* MagicBento Section */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 }}
+                    className="mt-12 sm:mt-16 lg:mt-20"
+                >
+                    <h3 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12">
+                        Project <span className="text-primary-400">Showcase</span>
+                    </h3>
+                    <MagicBento
+                        cards={[
+                            {
+                                title: "E-Commerce Solutions",
+                                description: "Building powerful online stores that drive sales",
+                                label: "E-Commerce",
+                                color: "#060010",
+                            },
+                            {
+                                title: "Web Applications",
+                                description: "Modern, scalable applications for any business",
+                                label: "Web Apps",
+                                color: "#060010",
+                            },
+                            {
+                                title: "Enterprise Solutions",
+                                description: "Complex systems that power large organizations",
+                                label: "Enterprise",
+                                color: "#060010",
+                            },
+                        ]}
+                        textAutoHide={true}
+                        enableStars={true}
+                        enableBorderGlow={true}
+                        enableTilt={true}
+                        enableMagnetism={true}
+                        clickEffect={true}
+                        spotlightRadius={300}
+                        particleCount={12}
+                        glowColor="20, 35, 160"
+                    />
                 </motion.div>
 
                 {/* Results Stats Bar */}
@@ -283,7 +345,7 @@ export default function CaseStudiesSection() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: 0.3 }}
+                    transition={{ delay: 0.4 }}
                     className="mt-12 sm:mt-16 lg:mt-20 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6"
                 >
                     {[
@@ -339,18 +401,8 @@ function CaseStudyCard({
     const isGradient = study.imageUrl.startsWith("gradient:");
 
     return (
-        <motion.div
+        <div
             ref={cardRef}
-            layout
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            whileHover={{ y: -8 }}
-            transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 30,
-                delay: index * 0.1,
-            }}
             className={`group relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer bg-white/5 backdrop-blur-sm border border-white/10 hover:border-primary-400/50 transition-all ${
                 study.featured ? "lg:col-span-2 lg:row-span-2" : ""
             }`}
@@ -482,7 +534,7 @@ function CaseStudyCard({
                 animate={{ opacity: isHovered ? 1 : 0 }}
                 transition={{ duration: 0.3 }}
             />
-        </motion.div>
+        </div>
     );
 }
 

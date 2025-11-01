@@ -3,7 +3,35 @@ import Footer from "@/components/Footer";
 import ScrollStack, { ScrollStackItem } from "@/components/ScrollStack";
 import MagicBento from "@/components/MagicBento";
 
-const PROJECT_DATA: { [key: string]: any } = {
+interface ProjectResult {
+  metric: string;
+  value: string;
+  description?: string;
+}
+
+interface ProjectData {
+  id: string;
+  slug: string;
+  title: string;
+  client: string;
+  industry: string;
+  category: string;
+  imageUrl: string;
+  challenge: string;
+  solution: string;
+  results: ProjectResult[];
+  tags: string[];
+  testimonial?: {
+    quote: string;
+    author: string;
+    role: string;
+  };
+  features?: string[];
+  technologies?: string[];
+  link?: string;
+}
+
+const PROJECT_DATA: { [key: string]: ProjectData } = {
   "doctor-appointment-system": {
     id: "doctor-appointment",
     slug: "doctor-appointment-system",
@@ -100,11 +128,11 @@ const PROJECT_DATA: { [key: string]: any } = {
 export default function ProjectDetailPage({ params }: { params: { slug: string } }) {
   // Handle different slug formats
   const slug = params.slug.toLowerCase().replace(/\s+/g, '-');
-  const project = PROJECT_DATA[slug] || 
-    Object.values(PROJECT_DATA).find((p: any) => 
+  const project = PROJECT_DATA[slug] as ProjectData | undefined || 
+    Object.values(PROJECT_DATA).find((p: ProjectData) => 
       p.id === params.slug || 
       p.title.toLowerCase().replace(/\s+/g, '-') === slug
-    );
+    ) as ProjectData | undefined;
 
   if (!project) {
     return (
@@ -136,7 +164,7 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
     },
     {
       title: "Results",
-      description: `Achieved ${project.results.map(r => r.value).join(", ")} across key metrics`,
+      description: `Achieved ${project.results.map((r: ProjectResult) => r.value).join(", ")} across key metrics`,
       label: "Impact",
       color: "#060010",
     },
@@ -208,7 +236,7 @@ export default function ProjectDetailPage({ params }: { params: { slug: string }
               <div className="rounded-3xl p-8 sm:p-12 bg-white/5 backdrop-blur-sm border border-white/10">
                 <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Results</h2>
                 <div className="grid grid-cols-3 gap-4 mb-6">
-                  {project.results.map((result: any, i: number) => (
+                  {project.results.map((result: ProjectResult, i: number) => (
                     <div key={i} className="text-center p-4 rounded-xl bg-white/5 border border-white/10">
                       <div className="text-2xl sm:text-3xl font-bold text-primary-300 mb-1">{result.value}</div>
                       <div className="text-xs sm:text-sm text-white/60">{result.metric}</div>
