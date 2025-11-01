@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -106,6 +106,11 @@ export default function HeroSection(props: HeroSectionProps = {}) {
     },
   };
 
+  // Helper function to create properly typed cubic bezier ease
+  const createCubicBezier = (x1: number, y1: number, x2: number, y2: number): [number, number, number, number] => {
+    return [x1, y1, x2, y2];
+  };
+  
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
@@ -113,15 +118,15 @@ export default function HeroSection(props: HeroSectionProps = {}) {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: [0.6, -0.05, 0.01, 0.99],
+        ease: createCubicBezier(0.6, -0.05, 0.01, 0.99),
       },
     },
-  };
+  } as Variants;
 
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen flex items-center justify-center text-center overflow-hidden"
+      className="relative h-screen flex items-center justify-center text-center overflow-hidden pt-16"
       aria-label="Hero section"
     >
       {/* Background Video */}
