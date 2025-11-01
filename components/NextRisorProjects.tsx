@@ -84,6 +84,7 @@ export default function AdvancedProjectShowcase() {
                     <motion.span
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
                         className="inline-flex items-center gap-2 text-sm font-medium text-primary-400 mb-4"
                     >
                         <div className="w-2 h-2 rounded-full bg-primary-400" />
@@ -93,6 +94,7 @@ export default function AdvancedProjectShowcase() {
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
                         className="text-4xl lg:text-6xl font-bold mb-6"
                     >
@@ -102,6 +104,7 @@ export default function AdvancedProjectShowcase() {
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
                         className="text-xl text-gray-300 max-w-2xl mx-auto"
                     >
@@ -113,6 +116,7 @@ export default function AdvancedProjectShowcase() {
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
                     transition={{ delay: 0.3 }}
                     className="flex flex-wrap justify-center gap-4 mb-12"
                 >
@@ -210,6 +214,7 @@ function ProjectCard({
                         src={project.imageUrl}
                         alt={project.title}
                         className="w-full h-full object-cover"
+                        loading="lazy"
                     />
                 )}
 
@@ -227,16 +232,6 @@ function ProjectCard({
 
             {/* Content */}
             <div className="relative z-10 p-8 h-full flex flex-col justify-end min-h-[400px]">
-                {/* Category Badge */}
-                {/* <motion.span
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 + 0.2 }}
-                    className="inline-block px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white text-sm font-medium mb-4 border border-white/20"
-                >
-                    {project.category}
-                </motion.span> */}
-
                 {/* Title & Description */}
                 <motion.h3
                     initial={{ opacity: 0, y: 20 }}

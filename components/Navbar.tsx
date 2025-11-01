@@ -16,7 +16,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all ${scrolled ? "bg-ink-900/70 backdrop-blur border-b border-white/10" : "bg-transparent"
+      className={`fixed top-0 inset-x-0 z-[10001] transition-all ${scrolled ? "bg-ink-900/70 backdrop-blur border-b border-white/10" : "bg-transparent"
         }`}
     >
       <div className="container h-16 flex items-center justify-between">
@@ -82,7 +82,7 @@ export default function Navbar() {
         {/* Mobile button */}
         <button
           aria-label="Open menu"
-          className="lg:hidden p-2.5 rounded-xl glass z-[10000] relative"
+          className="lg:hidden p-2.5 rounded-xl glass z-[10002] relative"
           onClick={() => setOpen(true)}
         >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" className="text-white">
@@ -107,7 +107,7 @@ export default function Navbar() {
               animate={{ x: 0 }} 
               exit={{ x: "-100%" }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="fixed left-0 top-0 h-full w-[85vw] max-w-sm bg-ink-800/95 backdrop-blur-xl border-r border-white/10 p-6 z-[9999] flex flex-col gap-6 shadow-2xl"
+              className="fixed left-0 top-0 h-screen w-[85vw] max-w-sm bg-ink-900/98 backdrop-blur-xl border-r border-white/10 p-6 z-[9999] flex flex-col gap-6 shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between mb-4 pb-4 border-b border-white/10">

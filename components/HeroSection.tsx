@@ -61,38 +61,64 @@ export default function HeroSection(props: HeroSectionProps = {}) {
   }, []);
 
   useEffect(() => {
-    // GSAP ScrollTrigger for text fade-out
-    if (!contentRef.current) return;
+    // GSAP ScrollTrigger for text fade-out (reversible)
+    if (!contentRef.current || !sectionRef.current) return;
+
+    let scrollTriggerInstance: ReturnType<typeof ScrollTrigger.create> | null = null;
+    let videoTriggerInstance: ReturnType<typeof ScrollTrigger.create> | null = null;
 
     const ctx = gsap.context(() => {
-      gsap.to(contentRef.current, {
-        opacity: 0,
-        y: -50,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
+      // Content fade animation (reversible)
+      scrollTriggerInstance = ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: 1,
+        onUpdate: (self) => {
+          if (contentRef.current) {
+            const progress = self.progress;
+            // Make it reversible - when scrolling back up, content reappears
+            gsap.to(contentRef.current, {
+              opacity: 1 - progress,
+              y: -50 * progress,
+              duration: 0.1,
+              ease: "none",
+            });
+          }
         },
       });
 
-      // Video zoom-out effect
+      // Video zoom-out effect (reversible)
       if (videoRef.current && !isMobile) {
-        gsap.to(videoRef.current, {
-          scale: 1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
+        videoTriggerInstance = ScrollTrigger.create({
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+          onUpdate: (self) => {
+            if (videoRef.current) {
+              const progress = self.progress;
+              gsap.to(videoRef.current, {
+                scale: 1.05 - (0.05 * progress),
+                duration: 0.1,
+                ease: "none",
+              });
+            }
           },
         });
       }
     });
 
-    return () => ctx.revert();
+    return () => {
+      // Cleanup ScrollTriggers
+      if (scrollTriggerInstance) {
+        scrollTriggerInstance.kill();
+      }
+      if (videoTriggerInstance) {
+        videoTriggerInstance.kill();
+      }
+      ctx.revert();
+    };
   }, [isMobile]);
 
   const containerVariants = {
@@ -218,8 +244,8 @@ export default function HeroSection(props: HeroSectionProps = {}) {
         animate="visible"
         className="relative z-10 px-6 max-w-4xl mx-auto text-white"
         style={{
-          opacity: contentOpacity,
-          y: contentY,
+          // GSAP will handle opacity and y transforms via ScrollTrigger
+          // Only use Framer Motion for initial animation
         }}
       >
         {/* Status Badge */}
